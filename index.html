@@ -164,7 +164,7 @@
 
 <h1>أهلاً بكم في بوابة المبادرة</h1>
 
-<button class="quotes-btn-fixed" id="quotes-btn" onclick="toggleQuotes()">أقوال عن المبادرة</button>
+<button class="quotes-btn-fixed" id="quotes-btn" onclick="toggleQuotes()">أقوال عن تنكراش</button>
 
 <img src="https://i.ibb.co/ymKS7S5g/1757820255227.jpg" alt="شعار المبادرة" class="logo">
 
@@ -174,7 +174,7 @@
 </div>
 
 <div class="quotes" id="quotes-section">
-  <h2>أقوال عن المبادرة</h2>
+  <h2>أقوال عن تنكراش</h2>
   <div class="quote-card" onclick="toggleQuote(this)">
     <span class="quote-name">أبيات شعرية</span>
     <span class="quote-arrow">&gt;</span>
@@ -196,7 +196,7 @@
     </div>
   </div>
   <div class="quote-card" onclick="toggleQuote(this)">
-    <span class="quote-name">د. محمد إخليه</span>
+    <span class="quote-name">د. منير إخليه</span>
     <span class="quote-arrow">&gt;</span>
     <div class="quote-text">
       ألا حـــيِّ الشباب بتنْـگراشا<br>
@@ -216,8 +216,10 @@
 
 <div class="form-container" id="main-form">
   <button class="close-btn" onclick="toggleForm()">×</button>
-  <form onsubmit="submitForm(event)">
+  <form name="participation" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="participation">
     <button type="button" class="back-btn" onclick="toggleForm()">← الرجوع</button>
+
     <label for="option">اختر نوع المشاركة:</label>
     <select id="option" name="option" required onchange="showOptionForm(this.value)">
       <option value="">-- اختر --</option>
@@ -226,26 +228,33 @@
       <option value="quran">مسابقة القرآن الكريم</option>
       <option value="other">أخرى</option>
     </select>
+
     <label for="fullname">الاسم الكامل:</label>
     <input type="text" id="fullname" name="fullname" placeholder="اكتب اسمك الكامل" required>
-    <label for="number">الرقم (ابدأ بـ 222+):</label>
-    <input type="text" id="number" name="number" placeholder="222+" required pattern="^222[0-9]{5}$" title="أدخل رقم موريتاني صحيح يبدأ بـ 222">
+
+    <label for="number">رقم الهاتف:</label>
+    <input type="text" id="number" name="number" placeholder="+222xxxxxxxx" required pattern="^(\+?222)?[0-9]{8}$" title="رقم الهاتف">
+
     <div class="option-form" id="sports-form">
       <label for="team">اسم الفريق / النادي:</label>
-      <input type="text" id="team" name="team" placeholder="اكتب اسم الفريق" required>
+      <input type="text" id="team" name="team" placeholder="اكتب اسم الفريق">
     </div>
+
     <div class="option-form" id="literary-form">
       <label for="essay-title">عنوان المشاركة الأدبية:</label>
-      <input type="text" id="essay-title" name="essay-title" placeholder="اكتب عنوان مشاركتك" required>
+      <input type="text" id="essay-title" name="essay-title" placeholder="اكتب عنوان مشاركتك">
     </div>
+
     <div class="option-form" id="quran-form">
       <label for="surah">اسم السورة أو الجزء:</label>
-      <input type="text" id="surah" name="surah" placeholder="اكتب السورة أو الجزء" required>
+      <input type="text" id="surah" name="surah" placeholder="اكتب السورة أو الجزء">
     </div>
+
     <div class="option-form" id="other-form">
       <label for="other-desc">صف مشاركتك:</label>
-      <textarea id="other-desc" name="other-desc" placeholder="صف مشاركتك" required></textarea>
+      <textarea id="other-desc" name="other-desc" placeholder="صف مشاركتك"></textarea>
     </div>
+
     <button type="submit" class="submit-btn">إرسال</button>
   </form>
 </div>
@@ -273,12 +282,6 @@
   function toggleQuote(card) {
     const text = card.querySelector('.quote-text');
     text.style.display = (text.style.display === 'block') ? 'none' : 'block';
-  }
-
-  function submitForm(event) {
-    event.preventDefault();
-    alert("تم الإرسال 🎉");
-    document.getElementById('main-form').style.display = 'none';
   }
 </script>
 
