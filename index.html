@@ -15,6 +15,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
   }
   .header {
     width: 100%;
@@ -46,28 +47,68 @@
   button.submit-btn:hover { background-color: #e6c200; }
   .close-btn { position: absolute; top: 20px; right: 20px; font-size: 1.5em; background-color: #FFD700; color: #000; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; }
   .option-form { display: none; margin-top: 15px; }
-  .about { display: inline-block; background-color: #FFF8DC; color: #000; border: 2px solid #FFD700; border-radius: 15px; padding: 15px 25px; margin: 20px 10px; line-height: 1.8; text-align: justify; box-shadow: 0 0 20px #FFD700; font-size: 1.1em; max-width: 90%; box-sizing: border-box; }
+  .about { display: inline-block; background-color: #FFF8DC; color: #000; border: 2px solid #FFD700; border-radius: 15px; padding: 15px 25px; margin: 20px 10px; line-height: 1.8; text-align: justify; box-shadow: 0 0 20px #FFD700; font-size: 1.1em; max-width: 80%; box-sizing: border-box; }
   .quotes { max-width: 300px; position: fixed; top: 60px; right: 20px; padding: 15px; border: 2px solid #FFD700; border-radius: 15px; background: #fff; box-shadow: 0 0 20px #FFD700; display: none; flex-direction: column; z-index: 1004; overflow-y: auto; max-height: 60vh; }
   .quotes h2 { text-align: center; color: #000; margin-bottom: 10px; font-size: 1.1em; }
   .quote-card { background: #fff; border: 1px solid #FFD700; border-radius: 12px; padding: 8px; margin: 6px 0; cursor: pointer; box-shadow: 0 0 10px rgba(255,215,0,0.5); display: flex; justify-content: space-between; align-items: center; }
   .quote-name { font-weight: bold; color: #000; font-size: 0.95em; }
   .quote-text { font-style: italic; color: #333; font-size: 0.9em; display: none; margin-left: 10px; }
   .quote-arrow { font-weight: bold; font-size: 1.2em; margin-left: 10px; }
-  /* رسالة النجاح */
+
   .success-message {
     display: none;
-    margin-top: 15px;
-    padding: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
     background: #d4edda;
     color: #155724;
     border: 2px solid #c3e6cb;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: clamp(1em, 2vw, 1.3em);
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .creator-name {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 6em;
+    color: rgba(255, 215, 0, 0.15);
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    text-align: center;
+    animation: shimmer 3s linear infinite, floatText 5s ease-in-out infinite alternate;
+    background: linear-gradient(90deg, rgba(255,215,0,0.2) 25%, rgba(255,215,0,0.5) 50%, rgba(255,215,0,0.2) 75%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes floatText {
+    0% { transform: translate(-50%, -50%) rotate(-45deg); }
+    50% { transform: translate(-48%, -52%) rotate(-45deg); }
+    100% { transform: translate(-50%, -50%) rotate(-45deg); }
   }
 </style>
 </head>
 <body>
+
+<div class="creator-name">محمد رضوان محمد المختار</div>
 
 <div class="header">مبادرة أجيال تنكراش</div>
 <h1>أهلاً بكم في بوابة المبادرة</h1>
@@ -84,25 +125,23 @@
   <div class="quote-card" onclick="toggleQuote(this)">
     <span class="quote-name">أبيات شعرية</span>
     <span class="quote-arrow">&gt;</span>
-    <div class="quote-text">إذا ذُكرَتْ تنگــراشُ يَفـــــوحُ<br>زمـــــــانٌ بَديعٌ بِغُـــرِّ الخِيَام<br><br>سقى اللهُ أزمانَها بالغُــــيوثِ<br>سقى سِدْرَها والغَضَا والبَشامْ</div>
+    <div class="quote-text">إذا ذُكرَتْ تنگــراشُ يَفـــــوحُ...</div>
   </div>
   <div class="quote-card" onclick="toggleQuote(this)">
     <span class="quote-name">محمد إخليه</span>
     <span class="quote-arrow">&gt;</span>
-    <div class="quote-text">تنݣراش بلد تيفلاش<br>ماخالݣ حد -ومنصابُ<br>مايبغي قطعاً نتݣراش<br>أحرَ تنكراش ترابُ</div>
+    <div class="quote-text">تنݣراش بلد تيفلاش...</div>
   </div>
   <div class="quote-card" onclick="toggleQuote(this)">
     <span class="quote-name">د. منير إخليه</span>
     <span class="quote-arrow">&gt;</span>
-    <div class="quote-text">ألا حـــيِّ الشباب بتنْـگراشا<br>ورجِّ لهم من الظَّفر انتِعاشا<br>فلا زالت مُـبَــــــادرةً تُرَوِّي<br>بِــإبداعاتها المهَج العِطاشا</div>
+    <div class="quote-text">ألا حـــيِّ الشباب بتنْـگراشا...</div>
   </div>
 </div>
 
 <div class="about">
   <strong>ماهي مبادرة أجيال تنكراش؟</strong><br><br>
-  مشروع مجتمعي يهدف لتقريب الأهل من أبنائهم وغرس القيم الدينية والأخلاقية.  
-  يعزز الروابط العائلية والمعرفية من خلال برامج تعليمية وترفيهية.  
-  يقدم مسابقات متنوعة تشمل القرآن الكريم، الأدب، والرياضة.
+  مبادرة أجيال تنكراش هي مشروع مجتمعي يهدف إلى تعزيز الروابط بين الأهل والأبناء وغرس القيم الدينية والأخلاقية. تهدف المبادرة إلى تنمية قدرات الشباب وتشجيعهم على الإبداع من خلال برامج تعليمية وترفيهية ومسابقات متنوعة في مجالات القرآن الكريم، الأدب، والرياضة.
 </div>
 
 <div class="form-container" id="main-form">
@@ -121,6 +160,7 @@
     <input type="text" id="fullname" name="fullname" placeholder="اكتب اسمك الكامل" required>
     <label for="number">رقم الهاتف:</label>
     <input type="text" id="number" name="number" placeholder="+222xxxxxxxx" required pattern="^(\+?222)?[0-9]{8}$" title="رقم الهاتف">
+    
     <div class="option-form" id="sports-form">
       <label for="team">اسم الفريق / النادي:</label>
       <input type="text" id="team" name="team" placeholder="اكتب اسم الفريق">
@@ -143,66 +183,65 @@
 </div>
 
 <script>
-  const TOKEN = "7481011898:AAE5447hpvobFlK0aN6hAXXWOcFKGDyM5Ok";
-  const CHAT_ID = "8089516279";
+const TOKEN = "7481011898:AAE5447hpvobFlK0aN6hAXXWOcFKGDyM5Ok";
+const CHAT_ID = "8089516279";
 
-  document.getElementById("participation-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+document.getElementById("participation-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const option = document.getElementById("option").value;
+  const fullname = document.getElementById("fullname").value;
+  const number = document.getElementById("number").value;
+  const team = document.getElementById("team").value;
+  const essay = document.getElementById("essay-title").value;
+  const surah = document.getElementById("surah").value;
+  const other = document.getElementById("other-desc").value;
 
-    const option = document.getElementById("option").value;
-    const fullname = document.getElementById("fullname").value;
-    const number = document.getElementById("number").value;
-    const team = document.getElementById("team").value;
-    const essay = document.getElementById("essay-title").value;
-    const surah = document.getElementById("surah").value;
-    const other = document.getElementById("other-desc").value;
+  let message = "📌 مشاركة جديدة:\n";
+  message += "👤 الاسم: " + fullname + "\n";
+  message += "📞 الهاتف: " + number + "\n";
+  message += "📂 نوع المشاركة: " + option + "\n";
+  if(team) message += "🏆 الفريق: " + team + "\n";
+  if(essay) message += "✍️ الأدبية: " + essay + "\n";
+  if(surah) message += "📖 القرآن: " + surah + "\n";
+  if(other) message += "📝 أخرى: " + other + "\n";
 
-    let message = "📌 مشاركة جديدة للمبادرة:\n";
-    message += "👤 الاسم: " + fullname + "\n";
-    message += "📞 الهاتف: " + number + "\n";
-    message += "📂 نوع المشاركة: " + option + "\n";
-    if(team) message += "🏆 الفريق: " + team + "\n";
-    if(essay) message += "✍️ الأدبية: " + essay + "\n";
-    if(surah) message += "📖 القرآن: " + surah + "\n";
-    if(other) message += "📝 أخرى: " + other + "\n";
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.ok){
+      document.getElementById("success").style.display = "block";
+      document.getElementById("participation-form").reset();
+      setTimeout(()=>{document.getElementById("success").style.display="none";},3000);
+    } else {
+      alert("⚠️ حدث خطأ أثناء الإرسال");
+    }
+  })
+  .catch(err => alert("⚠️ لم يتم الإرسال: " + err));
+});
 
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.ok){
-        document.getElementById("success").style.display = "block";
-        document.getElementById("participation-form").reset();
-      } else {
-        alert("⚠️ حدث خطأ أثناء الإرسال");
-      }
-    })
-    .catch(err => alert("⚠️ لم يتم الإرسال: " + err));
-  });
-
-  function toggleForm() {
-    const form = document.getElementById('main-form');
-    form.style.display = (form.style.display === 'flex') ? 'none' : 'flex';
-  }
-  function showOptionForm(value) {
-    const forms = document.querySelectorAll('.option-form');
-    forms.forEach(f => f.style.display = 'none');
-    if(value === 'sports') document.getElementById('sports-form').style.display = 'block';
-    if(value === 'literary') document.getElementById('literary-form').style.display = 'block';
-    if(value === 'quran') document.getElementById('quran-form').style.display = 'block';
-    if(value === 'other') document.getElementById('other-form').style.display = 'block';
-  }
-  function toggleQuotes() {
-    const quotes = document.getElementById('quotes-section');
-    quotes.style.display = (quotes.style.display === 'flex') ? 'none' : 'flex';
-  }
-  function toggleQuote(card) {
-    const text = card.querySelector('.quote-text');
-    text.style.display = (text.style.display === 'block') ? 'none' : 'block';
-  }
+function toggleForm() {
+  const form = document.getElementById('main-form');
+  form.style.display = (form.style.display === 'flex') ? 'none' : 'flex';
+}
+function showOptionForm(value) {
+  document.querySelectorAll('.option-form').forEach(f => f.style.display='none');
+  if(value==='sports') document.getElementById('sports-form').style.display='block';
+  if(value==='literary') document.getElementById('literary-form').style.display='block';
+  if(value==='quran') document.getElementById('quran-form').style.display='block';
+  if(value==='other') document.getElementById('other-form').style.display='block';
+}
+function toggleQuotes() {
+  const quotes = document.getElementById('quotes-section');
+  quotes.style.display = (quotes.style.display === 'flex') ? 'none' : 'flex';
+}
+function toggleQuote(card) {
+  const text = card.querySelector('.quote-text');
+  text.style.display = (text.style.display === 'block') ? 'none' : 'block';
+}
 </script>
 
 </body>
