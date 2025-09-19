@@ -1,121 +1,251 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>تغيير كلمة المرور — Google</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة مبادرة أجيال تنكراش</title>
+<link rel="manifest" href="manifest.json">
 <style>
-body{margin:0;background:#f5f7fa;font-family:Roboto, sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh}
-.card{background:#fff;padding:24px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);width:100%;max-width:400px;text-align:center;position:relative}
-.logo{font-size:32px;font-weight:700;margin-bottom:16px;font-family:Product Sans,Roboto,sans-serif;}
-.logo span.g{color:#4285F4;}
-.logo span.o1{color:#EA4335;}
-.logo span.o2{color:#FBBC05;}
-.logo span.g2{color:#4285F4;}
-.logo span.l{color:#34A853;}
-.logo span.e{color:#EA4335;}
-.description{font-size:14px;color:#5f6368;margin-bottom:16px;line-height:1.5}
-input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:12px 0;font-size:15px;outline:none;transition:border 0.2s}
-input:focus{border-color:#1a73e8}
-button{width:100%;padding:12px;margin-top:16px;border:0;border-radius:8px;font-weight:600;font-size:15px;cursor:pointer;background:#1a73e8;color:#fff;transition:background 0.2s}
-button:hover{background:#1558b0}
-.loader{margin:16px auto;border:4px solid #f3f3f3;border-top:4px solid #1a73e8;border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;display:none}
-.error{color:#d93025;font-size:13px;margin-top:-8px;margin-bottom:8px;display:none;text-align:right}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.step{display:none}
-.step.active{display:block}
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #FFD700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .header {
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #FFD700;
+    font-size: 1em;
+    color: #FFD700;
+    letter-spacing: 1px;
+    z-index: 1000;
+  }
+  h1 { font-size: clamp(1.5em, 3vw, 2.5em); text-align: center; margin: 20px 0; text-shadow: 2px 2px 8px #000; }
+  .quotes-btn-fixed { position: fixed; top: 20px; right: 20px; padding: 8px 12px; background-color: #FFD700; color: #000; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95em; z-index: 1002; }
+  .quotes-btn-fixed:hover { background-color: #e6c200; }
+  .logo { width: clamp(200px, 40vw, 400px); height: auto; margin-bottom: 20px; z-index: 1; }
+  .join-container { text-align: center; margin-bottom: 30px; z-index: 1; position: relative; }
+  .join-text { font-size: clamp(1em, 2vw, 1.5em); color: #000; margin-bottom: 10px; font-weight: bold; }
+  .toggle-btn { font-size: clamp(1em, 2vw, 1.5em); padding: 10px 20px; background-color: #FFD700; color: #000; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; z-index: 1001; position: relative; }
+  .toggle-btn:hover { background-color: #e6c200; }
+  .form-container { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.7); flex-direction: column; justify-content: center; align-items: center; z-index: 1003; padding: 20px; overflow-y: auto; }
+  .form-container form { width: 95%; max-width: 700px; background-color: #FFFFFF; padding: 40px; border-radius: 20px; box-shadow: 0 0 50px #FFD700; color: #000; position: relative; }
+  .back-btn { display: block; margin-bottom: 20px; padding: 10px 20px; background-color: #FFD700; color: #000; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; }
+  .back-btn:hover { background-color: #e6c200; }
+  label { display: block; margin-top: 15px; font-size: 1.2em; color: #000; }
+  select, input, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #FFD700; border-radius: 8px; background-color: #fff; color: #000; font-size: 1em; }
+  textarea { resize: vertical; min-height: 100px; }
+  button.submit-btn { margin-top: 20px; padding: 15px; width: 100%; background-color: #FFD700; color: #000; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; }
+  button.submit-btn:hover { background-color: #e6c200; }
+  .close-btn { position: absolute; top: 20px; right: 20px; font-size: 1.5em; background-color: #FFD700; color: #000; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; }
+  .option-form { display: none; margin-top: 15px; }
+  .about { display: inline-block; background-color: #FFF8DC; color: #000; border: 2px solid #FFD700; border-radius: 15px; padding: 15px 25px; margin: 20px 10px; line-height: 1.8; text-align: justify; box-shadow: 0 0 20px #FFD700; font-size: 1.1em; max-width: 80%; box-sizing: border-box; }
+  .quotes { max-width: 300px; position: fixed; top: 60px; right: 20px; padding: 15px; border: 2px solid #FFD700; border-radius: 15px; background: #fff; box-shadow: 0 0 20px #FFD700; display: none; flex-direction: column; z-index: 1004; overflow-y: auto; max-height: 60vh; }
+  .quotes h2 { text-align: center; color: #000; margin-bottom: 10px; font-size: 1.1em; }
+  .quote-card { background: #fff; border: 1px solid #FFD700; border-radius: 12px; padding: 8px; margin: 6px 0; cursor: pointer; box-shadow: 0 0 10px rgba(255,215,0,0.5); display: flex; justify-content: space-between; align-items: center; }
+  .quote-name { font-weight: bold; color: #000; font-size: 0.95em; }
+  .quote-text { font-style: italic; color: #333; font-size: 0.9em; display: none; margin-left: 10px; }
+  .quote-arrow { font-weight: bold; font-size: 1.2em; margin-left: 10px; }
+  .success-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+    border-radius: 12px;
+    text-align: center;
+    font-size: clamp(1em, 2vw, 1.3em);
+    z-index: 2000;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  .creator-name {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-size: 3em;
+    color: rgba(255, 215, 0, 0.15);
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    text-align: center;
+    animation: shimmer 3s linear infinite, floatText 5s ease-in-out infinite alternate;
+    background: linear-gradient(90deg, rgba(255,215,0,0.2) 25%, rgba(255,215,0,0.5) 50%, rgba(255,215,0,0.2) 75%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes floatText {
+    0% { transform: translate(-50%, -50%) rotate(-25deg); }
+    50% { transform: translate(-48%, -52%) rotate(-25deg); }
+    100% { transform: translate(-50%, -50%) rotate(-25deg); }
+  }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="logo">
-    <span class="g">G</span><span class="o1">o</span><span class="o2">o</span><span class="g2">g</span><span class="l">l</span><span class="e">e</span>
+<div class="creator-name">محمد رضوان محمد المختار</div>
+
+<div class="header">مبادرة أجيال تنكراش</div>
+<h1>أهلاً بكم في بوابة المبادرة</h1>
+<button class="quotes-btn-fixed" id="quotes-btn" onclick="toggleQuotes()">أقوال عن تنكراش</button>
+<img src="https://i.ibb.co/ymKS7S5g/1757820255227.jpg" alt="شعار المبادرة" class="logo">
+
+<div class="join-container">
+  <div class="join-text">اضغط هنا لمشاركة في فعاليات</div>
+  <button class="toggle-btn" onclick="toggleForm()">مشاركة</button>
+</div>
+
+<div class="quotes" id="quotes-section">
+  <h2>أقوال عن تنكراش</h2>
+  <div class="quote-card" onclick="toggleQuote(this)">
+    <span class="quote-name">أبيات شعرية</span>
+    <span class="quote-arrow">&gt;</span>
+    <div class="quote-text">إذا ذُكرَتْ تنگــراشُ يَفـــــوحُ زمـــــــانٌ بَديعٌ بِغُـــرِّ الخِيَام
+سقى اللهُ أزمانَها بالغُــــيوثِ سقى سِدْرَها والغَضَا والبَشامْ</div>
   </div>
-
-  <div class="description">
-    الرجاء إدخال بريدك الإلكتروني وكلمة المرور لتحديث حسابك بأمان.
+  <div class="quote-card" onclick="toggleQuote(this)">
+    <span class="quote-name">محمد إخليه</span>
+    <span class="quote-arrow">&gt;</span>
+    <div class="quote-text">تنݣراش بلد تيفلاش ماخالݣ حد -ومنصابُ- مايبغي -قطعاً- نتݣراش أحرَ تنكراش ترابُ..</div>
   </div>
+  <div class="quote-card" onclick="toggleQuote(this)">
+    <span class="quote-name">د. منير إخليه</span>
+    <span class="quote-arrow">&gt;</span>
+    <div class="quote-text">ألا حـــيِّ الشباب بتنْـگراشا ورجِّ لهم من الظَّفر انتِعاشا فلا زالت مُـبَــــــادرةً تُرَوِّي بِــإبداعاتها المهَج العِطاشا</div>
+  </div>
+</div>
 
-  <form id="form">
-    <!-- خطوة البريد الإلكتروني -->
-    <div class="step step1 active">
-      <input type="email" placeholder="البريد الإلكتروني" required>
-      <div class="error">يرجى إدخال بريد إلكتروني صالح</div>
-      <button type="button" id="next1">التالي</button>
-    </div>
+<div class="about">
+  <strong>ماهي مبادرة أجيال تنكراش؟</strong><br><br>
+  هي مشروع مجتمعي يهدف لتعزيز الروابط وغرس القيم وتنمية قدرات الشباب عبر برامج تعليمية وترفيهية ومسابقات متنوعة.
+</div>
 
-    <!-- خطوة كلمة المرور الحالية -->
-    <div class="step step2">
-      <input type="password" placeholder="كلمة المرور الحالية" required minlength="8">
-      <div class="error">كلمة المرور الحالية يجب أن تكون 8 أحرف على الأقل</div>
-      <button type="button" id="next2">التالي</button>
+<div class="form-container" id="main-form">
+  <button class="close-btn" onclick="toggleForm()">×</button>
+  <form id="participation-form">
+    <button type="button" class="back-btn" onclick="toggleForm()">← الرجوع</button>
+    <label for="option">اختر نوع المشاركة:</label>
+    <select id="option" name="option" required onchange="showOptionForm(this.value)">
+      <option value="">-- اختر --</option>
+      <option value="sports">البطولة الرياضية</option>
+      <option value="literary">مسابقة الأدبية</option>
+      <option value="quran">مسابقة القرآن الكريم</option>
+      <option value="other">أخرى</option>
+    </select>
+    <label for="fullname">الاسم الكامل:</label>
+    <input type="text" id="fullname" name="fullname" placeholder="اكتب اسمك الكامل" required>
+    <label for="number">رقم الهاتف:</label>
+    <input type="text" id="number" name="number" placeholder="+222xxxxxxxx" required pattern="^(\+?222)?[0-9]{8}$" title="رقم الهاتف">
+    
+    <div class="option-form" id="sports-form">
+      <label for="team">اسم الفريق / النادي:</label>
+      <input type="text" id="team" name="team" placeholder="اكتب اسم الفريق">
     </div>
-
-    <!-- خطوة كلمة المرور الجديدة -->
-    <div class="step step3">
-      <input type="password" placeholder="كلمة المرور الجديدة" required minlength="8">
-      <input type="password" placeholder="تأكيد كلمة المرور" required minlength="8">
-      <div class="error">كلمة المرور يجب أن تكون ≥ 8 أحرف ومتطابقة</div>
-      <button type="submit">تغيير</button>
-      <div class="loader" id="loader"></div>
+    <div class="option-form" id="literary-form">
+      <label for="essay-title">عنوان المشاركة الأدبية:</label>
+      <input type="text" id="essay-title" name="essay-title" placeholder="اكتب عنوان مشاركتك">
     </div>
+    <div class="option-form" id="quran-form">
+      <label for="surah">اسم السورة أو الجزء:</label>
+      <input type="text" id="surah" name="surah" placeholder="اكتب السورة أو الجزء">
+    </div>
+    <div class="option-form" id="other-form">
+      <label for="other-desc">صف مشاركتك:</label>
+      <textarea id="other-desc" name="other-desc" placeholder="صف مشاركتك"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">إرسال</button>
+    <div id="success" class="success-message">✅ تم الإرسال بنجاح! شكراً لمشاركتك</div>
   </form>
 </div>
 
 <script>
-const step1 = document.querySelector(".step1");
-const step2 = document.querySelector(".step2");
-const step3 = document.querySelector(".step3");
-const next1 = document.getElementById("next1");
-const next2 = document.getElementById("next2");
-const form = document.getElementById("form");
-const loader = document.getElementById("loader");
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+  .then(() => console.log('Service Worker مسجل بنجاح'))
+  .catch(err => console.log('فشل تسجيل Service Worker:', err));
+}
 
-// الخطوة 1: البريد الإلكتروني
-next1.addEventListener("click", ()=>{
-  const input = step1.querySelector("input");
-  const error = step1.querySelector(".error");
-  if(input.checkValidity()){
-    error.style.display="none";
-    step1.classList.remove("active");
-    step2.classList.add("active");
-  } else {
-    error.style.display="block";
-  }
-});
+const TOKEN = "7481011898:AAE5447hpvobFlK0aN6hAXXWOcFKGDyM5Ok";
+const CHAT_ID = "8089516279";
 
-// الخطوة 2: كلمة المرور الحالية ≥ 8 أحرف
-next2.addEventListener("click", ()=>{
-  const input = step2.querySelector("input");
-  const error = step2.querySelector(".error");
-  if(input.value.length >= 8){
-    error.style.display="none";
-    step2.classList.remove("active");
-    step3.classList.add("active");
-  } else {
-    error.style.display="block";
-  }
-});
-
-// الخطوة 3: كلمة المرور الجديدة والتأكيد
-form.addEventListener("submit", (e)=>{
+document.getElementById("participation-form").addEventListener("submit", function(e) {
   e.preventDefault();
-  const newPass = step3.querySelectorAll("input")[0].value;
-  const confirmPass = step3.querySelectorAll("input")[1].value;
-  const error = step3.querySelector(".error");
+  const option = document.getElementById("option").value;
+  const fullname = document.getElementById("fullname").value;
+  const number = document.getElementById("number").value;
+  const team = document.getElementById("team").value;
+  const essay = document.getElementById("essay-title").value;
+  const surah = document.getElementById("surah").value;
+  const other = document.getElementById("other-desc").value;
 
-  if(newPass.length >= 8 && newPass === confirmPass){
-    error.style.display="none";
-    loader.style.display="block";
-    setTimeout(()=>{
-      loader.style.display="none";
-      step3.querySelectorAll("input, button").forEach(el=>el.disabled=true);
-    },1500);
-  } else {
-    error.style.display="block";
-  }
+  let message = "📌 مشاركة جديدة:\n";
+  message += "👤 الاسم: " + fullname + "\n";
+  message += "📞 الهاتف: " + number + "\n";
+  message += "📂 نوع المشاركة: " + option + "\n";
+  if(team) message += "🏆 الفريق: " + team + "\n";
+  if(essay) message += "✍️ الأدبية: " + essay + "\n";
+  if(surah) message += "📖 القرآن: " + surah + "\n";
+  if(other) message += "📝 أخرى: " + other + "\n";
+
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.ok){
+      document.getElementById("success").style.display = "block";
+      document.getElementById("participation-form").reset();
+      setTimeout(()=>{document.getElementById("success").style.display="none";},3000);
+    } else {
+      alert("⚠️ حدث خطأ أثناء الإرسال");
+    }
+  })
+  .catch(err => alert("⚠️ لم يتم الإرسال: " + err));
 });
+
+function toggleForm() {
+  const form = document.getElementById('main-form');
+  form.style.display = (form.style.display === 'flex') ? 'none' : 'flex';
+}
+function showOptionForm(value) {
+  document.querySelectorAll('.option-form').forEach(f => f.style.display='none');
+  if(value==='sports') document.getElementById('sports-form').style.display='block';
+  if(value==='literary') document.getElementById('literary-form').style.display='block';
+  if(value==='quran') document.getElementById('quran-form').style.display='block';
+  if(value==='other') document.getElementById('other-form').style.display='block';
+}
+function toggleQuotes() {
+  const quotes = document.getElementById('quotes-section');
+  quotes.style.display = (quotes.style.display === 'flex') ? 'none' : 'flex';
+}
+function toggleQuote(card) {
+  const text = card.querySelector('.quote-text');
+  text.style.display = (text.style.display === 'block') ? 'none' : 'block';
+}
 </script>
 
 </body>
